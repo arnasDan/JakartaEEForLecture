@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+<h:head>
+    <h:outputStylesheet name="css/styles.css"/>
+    <title>MyBatis</title>
+</h:head>
+
+<h:body>
+    <h1>MyBatis</h1>
+    <h:form>
+        <h2>All items</h2>
+        <p:dataTable value="#{myBatisController.items}" var="item">
+            <p:column headerText="Item">
+                <h:outputText value="#{item.name}" />
+            </p:column>
+            <p:column headerText="Weight">
+                <h:outputText value="#{item.weight}" />
+            </p:column>
+            <p:column headerText="Warehouse">
+                <ui:repeat var="warehouse" value="#{myBatisController.getWarehouseById(item.warehouseId)}">
+                    <p>#{warehouse.name}</p>
+                </ui:repeat>
+            </p:column>
+            <p:column headerText="Suppliers">
+                <ui:repeat var="supplier" value="#{myBatisController.getItemSuppliers(item.id)}">
+                    <p>#{supplier.name}</p>
+                </ui:repeat>
+            </p:column>
+        </p:dataTable>
+        <h2>Assign supplier for item</h2>
+        <table>
+            <tr>
+                <td>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="supplier" value="Supplier"/>
+                        <p:selectOneMenu id="supplier" value="#{myBatisController.supplier.id}">
+                            <f:selectItems value="#{myBatisController.suppliers}" var="supplier"
+                                           itemLabel="#{supplier.name}" itemValue="#{supplier.id}"/>
+                        </p:selectOneMenu>
+                        <p:message for="supplier"/>
+                    </h:panelGrid>
+                </td>
+                <td>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="item" value="Item"/>
+                        <p:selectOneMenu id="item" value="#{myBatisController.itemToAssign.id}">
+                            <f:selectItems value="#{myBatisController.items}" var="item"
+                                           itemLabel="#{item.name}" itemValue="#{item.id}"/>
+                        </p:selectOneMenu>
+                        <p:message for="item"/>
+                    </h:panelGrid>
+                </td>
+            </tr>
+        </table>
+
+        <p:commandButton value="Assign"
+                         actionListener="#{myBatisController.assignItemToSupplier()}"
+                         action="mybatis-usecase?faces-redirect=true"
+                         ajax="false"/>
+
+        <p:messages globalOnly="true"/>
+
+        <h2>Create new item</h2>
+        <table>
+            <tr>
+                <td>
+                    <h:panelGrid columns="6">
+                        <p:outputLabel for="itemName" value="Item name"/>
+                        <p:inputText id="itemName" value="#{myBatisController.item.name}"/>
+                        <p:message for="itemName"/>
+
+                        <p:outputLabel for="itemWeight" value="Weight"/>
+                        <p:inputText id="itemWeight" value="#{myBatisController.item.weight}"/>
+                        <p:message for="itemWeight"/>
+
+                        <p:outputLabel for="itemWarehouse" value="Warehouse"/>
+                        <p:selectOneMenu id="itemWarehouse" value="#{myBatisController.warehouse.id}">
+                            <f:selectItems value="#{myBatisController.warehouses}" var="warehouse"
+                                           itemLabel="#{warehouse.name}" itemValue="#{warehouse.id}"/>
+                        </p:selectOneMenu>
+                        <p:message for="itemWarehouse"/>
+                    </h:panelGrid>
+                </td>
+            </tr>
+        </table>
+
+        <p:commandButton value="Create new item"
+                         actionListener="#{myBatisController.createNewItem()}"
+                         action="mybatis-usecase?faces-redirect=true"
+                         ajax="false"/>
+
+        <p:messages globalOnly="true"/>
+
+        <h2>Create new Warehouse</h2>
+        <table>
+            <tr>
+                <td>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="warehouseName" value="Warehouse name"/>
+                        <p:inputText id="warehouseName" value="#{myBatisController.warehouse.name}"/>
+                        <p:message for="warehouseName"/>
+                    </h:panelGrid>
+                </td>
+            </tr>
+        </table>
+
+        <p:commandButton value="Create new warehouse"
+                         actionListener="#{myBatisController.createNewWarehouse()}"
+                         action="mybatis-usecase?faces-redirect=true"
+                         ajax="false"/>
+
+        <p:messages globalOnly="true"/>
+
+        <h2>Create new supplier</h2>
+        <table>
+            <tr>
+                <td>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="supplierName" value="Supplier name"/>
+                        <p:inputText id="supplierName" value="#{myBatisController.supplier.name}"/>
+                        <p:message for="supplierName"/>
+                    </h:panelGrid>
+                </td>
+            </tr>
+        </table>
+
+        <p:commandButton value="Create new supplier"
+                         actionListener="#{myBatisController.createNewSupplier()}"
+                         action="mybatis-usecase?faces-redirect=true"
+                         ajax="false"/>
+
+        <p:messages globalOnly="true"/>
+
+    </h:form>
+
+</h:body>
+</html>

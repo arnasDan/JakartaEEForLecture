@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="arda.mybatis.model.Supplier" alias="Supplier"/>
+        <typeAlias type="arda.mybatis.model.Item" alias="Item"/>
+        <typeAlias type="arda.mybatis.model.Warehouse" alias="Warehouse"/>
+        <typeAlias type="arda.mybatis.model.ItemSupplier" alias="ItemSupplier"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="MANAGED"/>
+            <dataSource type="JNDI">
+                <property name="data_source" value="java:/WarehouseDataSource"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mybatis.xml/SupplierMapper.xml"/>
+        <mapper resource="mybatis.xml/ItemMapper.xml"/>
+        <mapper resource="mybatis.xml/WarehouseMapper.xml"/>
+        <mapper resource="mybatis.xml/ItemSupplierMapper.xml"/>
+    </mappers>
+</configuration>
