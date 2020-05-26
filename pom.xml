@@ -16,8 +16,21 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <deltaspike.version>1.7.2</deltaspike.version>
     <jakartaee.api.version>8.0.0</jakartaee.api.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.deltaspike.distribution</groupId>
+        <artifactId>distributions-bom</artifactId>
+        <version>${deltaspike.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -52,6 +65,11 @@
       <groupId>org.primefaces</groupId>
       <artifactId>primefaces</artifactId>
       <version>6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.deltaspike.core</groupId>
+      <artifactId>deltaspike-core-api</artifactId>
+      <version>1.9.3</version>
     </dependency>
   </dependencies>
 

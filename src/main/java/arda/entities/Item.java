@@ -39,6 +39,6 @@ public class Item implements Serializable {
     private List<Supplier> supplierList = new ArrayList<>();
 
     @Version
-    @Column(name="VERSION")
+    @Column(name="OPT_LOCK_VERSION")
     private Integer version;
 }

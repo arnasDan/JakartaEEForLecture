@@ -32,6 +32,11 @@
                     <p>#{supplier.name}</p>
                 </ui:repeat>
             </p:column>
+            <p:column>
+                <h:link value="Edit" outcome="details">
+                    <f:param name="itemId" value="#{item.id}" />
+                </h:link>
+            </p:column>
         </p:dataTable>
 
         <h2>Assign supplier for item</h2>

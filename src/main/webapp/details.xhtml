@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head/>
+<h:body>
+    <h2>#{itemDetails.item.name}</h2>
+
+    <h:panelGrid columns="6">
+        <h:form>
+            <p:outputLabel for="itemName" value="Item name"/>
+            <p:inputText id="itemName" value="#{itemDetails.item.name}"/>
+            <p:message for="itemName"/>
+            <br/>
+
+            <p:outputLabel for="itemWeight" value="Weight"/>
+            <p:inputText id="itemWeight" value="#{itemDetails.item.weight}"/>
+            <p:message for="itemWeight"/>
+            <br/>
+            <p:outputLabel value="Warehouse #{itemDetails.item.warehouse.name}"/> <br/>
+
+            <h:commandButton value="Update" action="#{itemDetails.save}">
+                <f:param name="itemId" value="#{itemDetails.item.id}" />
+            </h:commandButton>
+        </h:form>
+    </h:panelGrid>
+    <h:link outcome="jpa-usecase" value="Back to main page"/>
+</h:body>
+</html>
